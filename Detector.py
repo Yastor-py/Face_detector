@@ -11,7 +11,7 @@ img = cv2.imread('face3.png')
 
 
 #viedo = cv2.VideoCapture('Video.mp4')
-camera = cv2.VideoCapture('video2.mp4')
+camera = cv2.VideoCapture("video2.mp4")
 
 while True:
 
@@ -30,12 +30,17 @@ while True:
     #dla kazdej twarzy na zdjęciu
     for i in range(len(face_coordinates)):
         x , y, w , h = face_coordinates[i]
-        cv2.rectangle(frame,  (x, y), (x+w, y+h), (0,255,0),3,0) #randrange(128,256), randrange(256), randrange(256)
+        frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (0,255,0),3,0) #randrange(128,256), randrange(256), randrange(256)
+        cv2.putText(frame, 'menel', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 2)
+
+
     #to samo dla oczu
+    
     for i in range(len(eyes_coordinates)):
         x , y, w , h = eyes_coordinates[i]
-        cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0),3,0)
-        print("eye detected")
+        frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0),3,0)
+        cv2.putText(frame, 'oko', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 2)
+        print("eye detected") 
 
 
 
