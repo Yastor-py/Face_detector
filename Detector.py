@@ -30,17 +30,17 @@ while True:
     #dla kazdej twarzy na zdjęciu
     for i in range(len(face_coordinates)):
         x , y, w , h = face_coordinates[i]
-        frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (0,255,0),3,0) #randrange(128,256), randrange(256), randrange(256)
+        frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (randrange(128,256), randrange(256), randrange(256)),3,0) #randrange(128,256), randrange(256), randrange(256)
         cv2.putText(frame, 'menel', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 2)
 
 
     #to samo dla oczu
-    
-    for i in range(len(eyes_coordinates)):
-        x , y, w , h = eyes_coordinates[i]
-        frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0),3,0)
-        cv2.putText(frame, 'oko', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 2)
-        print("eye detected") 
+    if len(face_coordinates)>0:
+        for i in range(len(eyes_coordinates)):
+            x , y, w , h = eyes_coordinates[i]
+            frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0),3,0)
+            cv2.putText(frame, 'oko', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 2)
+            print("eye detected") 
 
 
 

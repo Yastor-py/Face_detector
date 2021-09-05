@@ -20,11 +20,20 @@ while True:
     screen2 = screen2[:, :, ::-1].copy()
     grayscaled_img = cv2.cvtColor(screen2, cv2.COLOR_BGR2GRAY)
     face_coordinates = trained_face_data.detectMultiScale(grayscaled_img)
+    eyes_coordinates = trained_eyes_data.detectMultiScale(grayscaled_img)
+
+
     for i in range(len(face_coordinates)):
         x , y, w , h = face_coordinates[i]
         cv2.rectangle(screen2,  (x, y), (x+w, y+h), (0,255,0),3,0)
+    if len(face_coordinates)>0:
 
-
+        for i in range(len(eyes_coordinates)):
+            x , y, w , h = eyes_coordinates[i]
+            
+            screen2 = cv2.rectangle(screen2,  (x, y), (x+w, y+h), (255,0,0),3,0)
+            cv2.putText(screen2, 'oko', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 2)
+            #print("eye detected") 
 
     cv2.imshow('Widzisz mnie??',screen2)
 
@@ -38,9 +47,9 @@ while True:
 
 """while True:
 
-    successful_frame_read, frame = camera.read()
+    successful_screen2_read, screen2 = camera.read()
     #zamiana na czarno-białe
-    grayscaled_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    grayscaled_img = cv2.cvtColor(screen2, cv2.COLOR_BGR2GRAY)
     
 
 
@@ -53,11 +62,11 @@ while True:
     #dla kazdej twarzy na zdjęciu
     for i in range(len(face_coordinates)):
         x , y, w , h = face_coordinates[i]
-        cv2.rectangle(frame,  (x, y), (x+w, y+h), (0,255,0),3,0) #randrange(128,256), randrange(256), randrange(256)
+        cv2.rectangle(screen2,  (x, y), (x+w, y+h), (0,255,0),3,0) #randrange(128,256), randrange(256), randrange(256)
     #to samo dla oczu
     for i in range(len(eyes_coordinates)):
         x , y, w , h = eyes_coordinates[i]
-        cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0),3,0)
+        cv2.rectangle(screen2,  (x, y), (x+w, y+h), (255,0,0),3,0)
         print("eye detected")
 
 
@@ -65,7 +74,7 @@ while True:
 
 
     #czeka milisekunde na klawisz 
-    cv2.imshow('Widzisz mnie??',frame)
+    cv2.imshow('Widzisz mnie??',screen2)
     key = cv2.waitKey(1)
     #jesli q to wyjdz
     if key==81 or key==113:

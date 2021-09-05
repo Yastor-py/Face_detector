@@ -4,7 +4,7 @@ import pyautogui
 import np
 
 
-trained_cars_data = cv2.CascadeClassifier('cars.xml')
+trained_cars_data = cv2.CascadeClassifier('faces.xml')
 
 img = cv2.imread('face3.png')
 
