@@ -4,14 +4,14 @@ from random import randrange
 
 #wytrenowanie modelu
 trained_face_data = cv2.CascadeClassifier('faces.xml')
-trained_eyes_data = cv2.CascadeClassifier('eyes.xml')
+#trained_eyes_data = cv2.CascadeClassifier('eyes.xml')
 
 #załadowanie zdjęcia/filmu/kamerki
 img = cv2.imread('face3.png')
 
 
 #viedo = cv2.VideoCapture('Video.mp4')
-camera = cv2.VideoCapture("video2.mp4")
+camera = cv2.VideoCapture("video22.mp4")
 
 while True:
 
@@ -23,7 +23,7 @@ while True:
 
     #wykrywanie twarzy o różnych rozmiarach 
     face_coordinates = trained_face_data.detectMultiScale(grayscaled_img)
-    eyes_coordinates = trained_eyes_data.detectMultiScale(grayscaled_img)
+    #eyes_coordinates = trained_eyes_data.detectMultiScale(grayscaled_img)
 
     #rysowanie ramki 
     print(face_coordinates)
@@ -34,13 +34,13 @@ while True:
         cv2.putText(frame, 'menel', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 2)
 
 
-    #to samo dla oczu
-    if len(face_coordinates)>0:
-        for i in range(len(eyes_coordinates)):
-            x , y, w , h = eyes_coordinates[i]
-            frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0),3,0)
-            cv2.putText(frame, 'oko', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 2)
-            print("eye detected") 
+    # #to samo dla oczu
+    # if len(face_coordinates)>0:
+    #     for i in range(len(eyes_coordinates)):
+    #         x , y, w , h = eyes_coordinates[i]
+    #         frame = cv2.rectangle(frame,  (x, y), (x+w, y+h), (255,0,0),3,0)
+    #         cv2.putText(frame, 'oko', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 2)
+    #         print("eye detected") 
 
 
 
